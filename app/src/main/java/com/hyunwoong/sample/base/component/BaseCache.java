@@ -10,14 +10,4 @@ import lombok.Data;
 @Data
 public abstract class BaseCache<E extends BaseEntity> {
     protected E data;
-
-    {
-        try {
-            data = this.injectModel().newInstance();
-        } catch (IllegalAccessException | InstantiationException e) {
-            e.printStackTrace();
-        }
-    }
-
-    protected abstract Class<E> injectModel();
 }

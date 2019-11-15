@@ -14,11 +14,7 @@ public class UserCache extends BaseCache<UserEntity> {
         return LazyHolder.instance;
     }
 
-    @Override protected Class<UserEntity> injectModel() {
-        return UserEntity.class;
-    }
-
     static class LazyHolder {
-        static UserCache instance;
+        static UserCache instance = new UserCache();
     }
 }
