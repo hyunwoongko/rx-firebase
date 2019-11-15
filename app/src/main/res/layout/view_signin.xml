@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data class="SignInView">
+
+        <variable
+            name="activity"
+            type="com.hyunwoong.sample.core.activity.SignInActivity" />
+
+        <variable
+            name="viewModel"
+            type="com.hyunwoong.sample.core.viewmodel.SignInViewModel" />
+
+    </data>
+
+    <LinearLayout
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+    </LinearLayout>
+</layout>
