@@ -10,6 +10,7 @@ import com.hyunwoong.sample.base.component.BaseEntity;
 public class UserEntity extends BaseEntity {
     private String id;
     private String pw;
+    private String name;
 
     public String getId() {
         return id;
@@ -19,11 +20,19 @@ public class UserEntity extends BaseEntity {
         return pw;
     }
 
+    public String getName() {
+        return name;
+    }
+
     public void setId(String id) {
         this.id = id;
     }
 
     public void setPw(String pw) {
         this.pw = pw;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

@@ -16,7 +16,7 @@ public abstract class BaseTask {
     protected MoveNavigator moveAndFinish;
     protected FinishNavigator finish;
 
-    protected BaseTask(TaskBuilder builder) {
+    public BaseTask(TaskBuilder builder) {
         this.toast = builder.toast;
         this.dialog = builder.dialog;
         this.move = builder.move;

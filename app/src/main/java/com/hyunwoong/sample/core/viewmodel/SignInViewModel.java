@@ -9,8 +9,8 @@ import androidx.lifecycle.ViewModel;
  * @homepage : https://github.com/gusdnd852
  */
 public class SignInViewModel extends ViewModel {
-    private MutableLiveData<String> id;
-    private MutableLiveData<String> pw;
+    private MutableLiveData<String> id = new MutableLiveData<>();
+    private MutableLiveData<String> pw = new MutableLiveData<>();
 
     public String getId() {
         return id.getValue();

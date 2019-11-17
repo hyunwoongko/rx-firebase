@@ -14,6 +14,7 @@ public class TaskFactory {
 
     public static <T extends BaseTask> T createTask(BaseActivity owner, Class<T> clazz) {
         try {
+            System.out.println(clazz);
             return BaseTask.builder()
                     .setToast(owner::toast)
                     .setDialog(owner::dialog)
@@ -23,7 +24,8 @@ public class TaskFactory {
                     .build(clazz);
 
         } catch (NoSuchMethodException | InstantiationException |
-                IllegalAccessException | InvocationTargetException ignore) {
+                IllegalAccessException | InvocationTargetException e) {
+            e.printStackTrace();
         }
         return null;
     }
