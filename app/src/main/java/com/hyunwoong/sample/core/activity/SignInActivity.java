@@ -5,7 +5,7 @@ import com.hyunwoong.sample.base.component.BaseActivity;
 import com.hyunwoong.sample.core.task.SignInTask;
 import com.hyunwoong.sample.core.viewmodel.SignInViewModel;
 import com.hyunwoong.sample.data.entity.UserEntity;
-import com.hyunwoong.sample.databinding.SignInView;
+import com.hyunwoong.sample.databinding.SignInViewBinding;
 import com.hyunwoong.sample.di.TaskFactory;
 
 /**
@@ -13,13 +13,13 @@ import com.hyunwoong.sample.di.TaskFactory;
  * @when : 2019-11-15 오후 3:12
  * @homepage : https://github.com/gusdnd852
  */
-public class SignInActivity extends BaseActivity<SignInView, SignInViewModel> {
+public class SignInActivity extends BaseActivity<SignInViewBinding, SignInViewModel> {
 
     private SignInTask signInTask = TaskFactory.createTask(this, SignInTask.class);
 
     @Override
     protected int injectView() {
-        return R.layout.view_signin;
+        return R.layout.sign_in_view;
     }
 
     @Override
@@ -28,9 +28,10 @@ public class SignInActivity extends BaseActivity<SignInView, SignInViewModel> {
     }
 
     public void signIn() {
-        signInTask.signIn(UserEntity.builder()
-                .id(viewModel.getId())
-                .pw(viewModel.getPw())
-                .build());
+        UserEntity user = new UserEntity();
+        user.setId(viewModel.getId());
+        user.setPw(viewModel.getPw());
+
+        signInTask.signIn(user);
     }
 }

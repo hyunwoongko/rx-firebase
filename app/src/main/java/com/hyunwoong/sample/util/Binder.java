@@ -1,7 +1,7 @@
 package com.hyunwoong.sample.util;
 
-import android.databinding.BindingAdapter;
 import android.view.View;
+import androidx.databinding.BindingAdapter;
 
 /**
  * @author : Hyunwoong

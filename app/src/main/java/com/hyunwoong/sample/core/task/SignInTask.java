@@ -4,7 +4,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.hyunwoong.sample.base.component.BaseTask;
-import com.hyunwoong.sample.core.activity.MainActivity;
+import com.hyunwoong.sample.core.activity.SignInActivity;
 import com.hyunwoong.sample.data.entity.UserEntity;
 
 /**
@@ -25,7 +25,7 @@ public class SignInTask extends BaseTask {
 
     private void updateView(Task<AuthResult> task) {
         if (task.isSuccessful()) {
-            moveAndFinish.move(MainActivity.class);
+            moveAndFinish.move(SignInActivity.class);
         } else {
             toast.show("로그인에 실패했습니다.");
         }

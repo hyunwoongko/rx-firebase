@@ -1,10 +1,12 @@
 package com.hyunwoong.sample.base.component;
 
-import android.databinding.DataBindingUtil;
-import android.databinding.ViewDataBinding;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+
+import androidx.annotation.Nullable;
+import androidx.databinding.DataBindingUtil;
+import androidx.databinding.ViewDataBinding;
 import androidx.lifecycle.ViewModel;
+
 import com.hyunwoong.sample.BR;
 import com.hyunwoong.sample.base.extension.UIExtension;
 import com.hyunwoong.sample.di.ViewModelFactory;
