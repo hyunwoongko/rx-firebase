@@ -1,17 +1,17 @@
 package com.hyunwoong.sample.core.viewmodel;
 
-import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
+import com.hyunwoong.sample.base.viwemodel.BaseViewModel;
+import com.hyunwoong.sample.util.Data;
 
 /**
  * @author : Hyunwoong
  * @when : 2019-11-18 오전 12:51
  * @homepage : https://github.com/gusdnd852
  */
-public class SignUpViewModel extends ViewModel {
-    private MutableLiveData<String> id = new MutableLiveData<>();
-    private MutableLiveData<String> pw = new MutableLiveData<>();
-    private MutableLiveData<String> name = new MutableLiveData<>();
+public class SignUpViewModel extends BaseViewModel {
+    private Data<String> id = new Data<>();
+    private Data<String> pw = new Data<>();
+    private Data<String> name = new Data<>();
 
     public String getId() {
         return id.getValue();

@@ -36,11 +36,10 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/font"
                 android:gravity="center"
-                android:paddingStart="100dp"
                 android:paddingTop="100dp"
-                android:paddingEnd="100dp"
-                android:paddingBottom="140dp"
+                android:paddingBottom="100dp"
                 android:text="Sample App"
+                android:textColor="#555555"
                 android:textSize="35sp"
                 android:textStyle="bold">
 
@@ -120,7 +119,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="60dp"
+                android:layout_marginTop="30dp"
                 android:layout_marginBottom="5dp"
                 android:fontFamily="@font/font"
                 android:gravity="center"
@@ -148,6 +147,7 @@
                     android:gravity="center"
                     android:onClick="@{()->activity.moveToSignUp()}"
                     android:text="here"
+                    android:textColor="#555555"
                     android:textSize="19sp"
                     android:textStyle="bold" />
 
@@ -161,5 +161,13 @@
 
             </LinearLayout>
         </LinearLayout>
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="90dp"
+            android:visibility="@{viewModel.progressBar}" />
+
     </FrameLayout>
 </layout>

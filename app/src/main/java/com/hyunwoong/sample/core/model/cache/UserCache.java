@@ -1,7 +1,7 @@
-package com.hyunwoong.sample.data.cache;
+package com.hyunwoong.sample.core.model.cache;
 
-import com.hyunwoong.sample.base.component.BaseCache;
-import com.hyunwoong.sample.data.entity.UserEntity;
+import com.hyunwoong.sample.base.model.BaseCache;
+import com.hyunwoong.sample.core.model.entity.UserEntity;
 
 /**
  * @author : Hyunwoong

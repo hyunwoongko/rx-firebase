@@ -1,7 +1,7 @@
 package com.hyunwoong.sample.core.activity;
 
 import com.hyunwoong.sample.R;
-import com.hyunwoong.sample.base.component.BaseActivity;
+import com.hyunwoong.sample.base.activity.BaseActivity;
 import com.hyunwoong.sample.core.viewmodel.MainViewModel;
 import com.hyunwoong.sample.databinding.MainView;
 
@@ -11,6 +11,7 @@ import com.hyunwoong.sample.databinding.MainView;
  * @homepage : https://github.com/gusdnd852
  */
 public class MainActivity extends BaseActivity<MainView, MainViewModel> {
+
     @Override protected int injectView() {
         return R.layout.main_view;
     }

@@ -2,11 +2,12 @@ package com.hyunwoong.sample.core.task;
 
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.FirebaseDatabase;
-import com.hyunwoong.sample.base.component.BaseTask;
+import com.hyunwoong.sample.base.activity.BaseActivity;
+import com.hyunwoong.sample.base.task.BaseTask;
 import com.hyunwoong.sample.core.activity.SignInActivity;
-import com.hyunwoong.sample.data.entity.UserEntity;
+import com.hyunwoong.sample.core.model.entity.UserEntity;
+import com.hyunwoong.sample.util.Firebase;
+import com.hyunwoong.sample.util.StringChecker;
 
 /**
  * @author : Hyunwoong
@@ -15,32 +16,26 @@ import com.hyunwoong.sample.data.entity.UserEntity;
  */
 public class SignUpTask extends BaseTask {
 
-    private FirebaseAuth auth = FirebaseAuth.getInstance();
-
-    public SignUpTask(TaskBuilder builder) {
-        super(builder);
-    }
-
-    private boolean isEmpty(String str) {
-        return str == null || str.replaceAll(" ", "").equals("");
+    public SignUpTask(BaseActivity owner) {
+        super(owner);
     }
 
     private void insertDatabase(Task<AuthResult> task, UserEntity user) {
         if (task.isSuccessful()) {
-            FirebaseDatabase.getInstance()
-                    .getReference("user")
-                    .child(auth.getUid())
-                    .setValue(user);
+            Firebase.reference("user")
+                    .child(Firebase.uid())
+                    .access(UserEntity.class)
+                    .insert(user);
         }
     }
 
-
     private void updateView(Task<AuthResult> task) {
+        hideProgress();
         if (task.isSuccessful()) {
-            toast.show("회원가입에 성공했습니다.");
-            moveAndFinish.move(SignInActivity.class);
+            toast("회원가입에 성공했습니다.");
+            moveAndFinish(SignInActivity.class);
         } else {
-            toast.show("회원가입에 실패했습니다.");
+            toast("회원가입에 실패했습니다.");
         }
     }
 
@@ -48,14 +43,21 @@ public class SignUpTask extends BaseTask {
         String id = user.getId();
         String pw = user.getPw();
         String name = user.getName();
+        showProgress();
 
-        if (isEmpty(id)) toast.show("이이디를 입력해주세요");
-        else if (isEmpty(pw)) toast.show("비밀번호를 입력해주세요");
-        else if (isEmpty(name)) toast.show("이름을 입력해주세요");
+        if (StringChecker.isEmpty(id))
+            hideAndToast("이이디를 입력해주세요");
+        else if (StringChecker.isEmpty(pw))
+            hideAndToast("비밀번호를 입력해주세요");
+        else if (StringChecker.isShort(pw, 6))
+            hideAndToast("비밀번호는 최소 6자 이상입니다");
+        else if (StringChecker.isEmpty(name))
+            hideAndToast("이름을 입력해주세요");
 
-        else auth.createUserWithEmailAndPassword(id, pw)
+        else Firebase.auth()
+                    .createUserWithEmailAndPassword(id, pw)
                     .addOnCompleteListener(task -> {
-                        insertDatabase(task, user); // 1. Insert Data to Database
+                        insertDatabase(task, user);// 1. Insert Database
                         updateView(task); // 2. Update View
                     });
     }

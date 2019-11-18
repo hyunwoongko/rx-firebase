@@ -36,11 +36,10 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/font"
                 android:gravity="center"
-                android:paddingStart="100dp"
                 android:paddingTop="100dp"
-                android:paddingEnd="100dp"
-                android:paddingBottom="140dp"
+                android:paddingBottom="100dp"
                 android:text="Sample App"
+                android:textColor="#555555"
                 android:textSize="35sp"
                 android:textStyle="bold">
 
@@ -146,5 +145,13 @@
                 android:textSize="25sp" />
 
         </LinearLayout>
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="40dp"
+            android:visibility="@{viewModel.progressBar}" />
+
     </FrameLayout>
 </layout>

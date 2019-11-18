@@ -1,6 +1,6 @@
-package com.hyunwoong.sample.data.entity;
+package com.hyunwoong.sample.core.model.entity;
 
-import com.hyunwoong.sample.base.component.BaseEntity;
+import com.hyunwoong.sample.base.model.BaseEntity;
 
 /**
  * @author : Hyunwoong

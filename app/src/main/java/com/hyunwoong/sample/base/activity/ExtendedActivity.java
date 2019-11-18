@@ -1,30 +1,28 @@
-package com.hyunwoong.sample.base.extension;
+package com.hyunwoong.sample.base.activity;
 
 import android.app.Activity;
 import android.content.Intent;
-import androidx.appcompat.app.AppCompatActivity;
+
 import androidx.core.app.ActivityCompat;
+import androidx.databinding.ViewDataBinding;
+
 import com.hyunwoong.sample.R;
+import com.hyunwoong.sample.base.viwemodel.BaseViewModel;
 
 /**
  * @author : Hyunwoong
- * @when : 2019-11-15 오후 3:11
+ * @when : 2019-11-18 오후 3:44
  * @homepage : https://github.com/gusdnd852
  */
-public abstract class ActivityExtension extends AppCompatActivity {
-    protected void getPermission(String... permissions) {
+public abstract class ExtendedActivity<V extends ViewDataBinding, VM extends BaseViewModel> extends MVVMActivity<V, VM> {
+
+    public void requestPermissions(String... permissions) {
         ActivityCompat.requestPermissions(this, permissions, 1);
     }
 
     @Override
     public void startActivity(Intent intent) {
         super.startActivity(intent);
-        overridePendingTransition(R.anim.activity_fadein, R.anim.activity_fadeout);
-    }
-
-    @Override
-    public void finish() {
-        super.finish();
         overridePendingTransition(R.anim.activity_fadein, R.anim.activity_fadeout);
     }
 
@@ -35,5 +33,11 @@ public abstract class ActivityExtension extends AppCompatActivity {
     public void startActivityAndFinish(Class<? extends Activity> activity) {
         startActivity(activity);
         finish();
+    }
+
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.activity_fadein, R.anim.activity_fadeout);
     }
 }

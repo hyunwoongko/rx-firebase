@@ -5,21 +5,25 @@
 
     <application
         android:allowBackup="true"
+        android:appComponentFactory="whateverString"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        tools:replace="android:appComponentFactory"
-        android:appComponentFactory="whateverString"
-        tools:ignore="GoogleAppIndexingWarning,UnusedAttribute">
+        tools:ignore="GoogleAppIndexingWarning,UnusedAttribute"
+        tools:replace="android:appComponentFactory">
 
-        <activity android:name=".core.activity.SignInActivity">
+        <!-- initial activity -->
+        <activity android:name=".core.activity.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!-- activities -->
+        <activity android:name=".core.activity.SignInActivity" />
         <activity android:name=".core.activity.SignUpActivity" />
         <activity android:name=".core.activity.MainActivity" />
 

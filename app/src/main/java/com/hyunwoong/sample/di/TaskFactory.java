@@ -1,7 +1,7 @@
 package com.hyunwoong.sample.di;
 
-import com.hyunwoong.sample.base.component.BaseActivity;
-import com.hyunwoong.sample.base.component.BaseTask;
+import com.hyunwoong.sample.base.activity.BaseActivity;
+import com.hyunwoong.sample.base.task.BaseTask;
 
 import java.lang.reflect.InvocationTargetException;
 
@@ -14,14 +14,8 @@ public class TaskFactory {
 
     public static <T extends BaseTask> T createTask(BaseActivity owner, Class<T> clazz) {
         try {
-            System.out.println(clazz);
-            return BaseTask.builder()
-                    .setToast(owner::toast)
-                    .setDialog(owner::dialog)
-                    .setMove(owner::startActivity)
-                    .setMoveAndFinish(owner::startActivityAndFinish)
-                    .setFinish(owner::finish)
-                    .build(clazz);
+            return clazz.getDeclaredConstructor(BaseActivity.class)
+                    .newInstance(owner);
 
         } catch (NoSuchMethodException | InstantiationException |
                 IllegalAccessException | InvocationTargetException e) {
@@ -29,4 +23,5 @@ public class TaskFactory {
         }
         return null;
     }
+
 }

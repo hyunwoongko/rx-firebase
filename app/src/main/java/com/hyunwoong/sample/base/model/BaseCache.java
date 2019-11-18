@@ -1,4 +1,4 @@
-package com.hyunwoong.sample.base.component;
+package com.hyunwoong.sample.base.model;
 
 
 /**
@@ -9,11 +9,11 @@ package com.hyunwoong.sample.base.component;
 public abstract class BaseCache<E extends BaseEntity> {
     protected E data;
 
-    public E getData() {
+    public E read() {
         return data;
     }
 
-    public void setData(E data) {
+    public void copy(E data) {
         this.data = data;
     }
 }

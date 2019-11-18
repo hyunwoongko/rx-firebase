@@ -1,4 +1,4 @@
-package com.hyunwoong.sample.base.component;
+package com.hyunwoong.sample.base.model;
 
 import java.io.Serializable;
 

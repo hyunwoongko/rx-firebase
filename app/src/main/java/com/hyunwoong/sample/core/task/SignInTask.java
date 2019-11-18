@@ -2,11 +2,12 @@ package com.hyunwoong.sample.core.task;
 
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
-import com.hyunwoong.sample.base.component.BaseTask;
+import com.hyunwoong.sample.base.activity.BaseActivity;
+import com.hyunwoong.sample.base.task.BaseTask;
 import com.hyunwoong.sample.core.activity.MainActivity;
-import com.hyunwoong.sample.core.activity.SignInActivity;
-import com.hyunwoong.sample.data.entity.UserEntity;
+import com.hyunwoong.sample.core.model.entity.UserEntity;
+import com.hyunwoong.sample.util.Firebase;
+import com.hyunwoong.sample.util.StringChecker;
 
 /**
  * @author : Hyunwoong
@@ -14,31 +15,32 @@ import com.hyunwoong.sample.data.entity.UserEntity;
  * @homepage : https://github.com/tgusdnd852
  */
 public class SignInTask extends BaseTask {
-    private FirebaseAuth auth = FirebaseAuth.getInstance();
 
-    public SignInTask(TaskBuilder builder) {
-        super(builder);
-    }
-
-    private boolean isEmpty(String str) {
-        return str == null || str.replaceAll(" ", "").equals("");
+    public SignInTask(BaseActivity owner) {
+        super(owner);
     }
 
     private void updateView(Task<AuthResult> task) {
+        hideProgress();
         if (task.isSuccessful()) {
-            moveAndFinish.move(MainActivity.class);
+            moveAndFinish(MainActivity.class);
         } else {
-            toast.show("로그인에 실패했습니다.");
+            toast("로그인에 실패했습니다.");
         }
     }
 
     public void signIn(UserEntity user) {
         String id = user.getId();
         String pw = user.getPw();
+        showProgress();
 
-        if (isEmpty(id)) toast.show("이이디를 입력해주세요");
-        else if (isEmpty(pw)) toast.show("비밀번호를 입력해주세요");
-        else auth.signInWithEmailAndPassword(id, pw)
+        if (StringChecker.isEmpty(id))
+            hideAndToast("아이디를 입력해주세요");
+        else if (StringChecker.isEmpty(pw))
+            hideAndToast("비밀번호를 입력해주세요");
+
+        else Firebase.auth()
+                    .signInWithEmailAndPassword(id, pw)
                     .addOnCompleteListener(this::updateView);
     }
 }

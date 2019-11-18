@@ -1,10 +1,12 @@
 package com.hyunwoong.sample.core.activity;
 
+import android.view.View;
+
 import com.hyunwoong.sample.R;
-import com.hyunwoong.sample.base.component.BaseActivity;
+import com.hyunwoong.sample.base.activity.BaseActivity;
+import com.hyunwoong.sample.core.model.entity.UserEntity;
 import com.hyunwoong.sample.core.task.SignInTask;
 import com.hyunwoong.sample.core.viewmodel.SignInViewModel;
-import com.hyunwoong.sample.data.entity.UserEntity;
 import com.hyunwoong.sample.databinding.SignInView;
 import com.hyunwoong.sample.di.TaskFactory;
 import com.hyunwoong.sample.util.OnXML;
@@ -35,6 +37,7 @@ public class SignInActivity extends BaseActivity<SignInView, SignInViewModel> {
         user.setPw(viewModel.getPw());
 
         signInTask.signIn(user);
+
     }
 
     @OnXML(resid = R.layout.signin_view)

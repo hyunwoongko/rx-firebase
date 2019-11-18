@@ -1,11 +1,10 @@
 package com.hyunwoong.sample.core.activity;
 
 import com.hyunwoong.sample.R;
-import com.hyunwoong.sample.base.component.BaseActivity;
-import com.hyunwoong.sample.core.task.SignInTask;
+import com.hyunwoong.sample.base.activity.BaseActivity;
+import com.hyunwoong.sample.core.model.entity.UserEntity;
 import com.hyunwoong.sample.core.task.SignUpTask;
 import com.hyunwoong.sample.core.viewmodel.SignUpViewModel;
-import com.hyunwoong.sample.data.entity.UserEntity;
 import com.hyunwoong.sample.databinding.SignUpView;
 import com.hyunwoong.sample.di.TaskFactory;
 import com.hyunwoong.sample.util.OnXML;
@@ -33,7 +32,6 @@ public class SignUpActivity extends BaseActivity<SignUpView, SignUpViewModel> {
         user.setId(viewModel.getId());
         user.setPw(viewModel.getPw());
         user.setName(viewModel.getName());
-
         signUpTask.signUp(user);
     }
 }

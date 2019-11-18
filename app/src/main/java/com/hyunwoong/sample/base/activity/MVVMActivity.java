@@ -1,26 +1,25 @@
-package com.hyunwoong.sample.base.component;
+package com.hyunwoong.sample.base.activity;
 
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
-import androidx.lifecycle.ViewModel;
 
 import com.hyunwoong.sample.BR;
-import com.hyunwoong.sample.base.extension.UIExtension;
+import com.hyunwoong.sample.base.viwemodel.BaseViewModel;
 import com.hyunwoong.sample.di.ViewModelFactory;
-
 
 /**
  * @author : Hyunwoong
- * @when : 2019-11-15 오후 3:11
+ * @when : 2019-11-18 오후 3:42
  * @homepage : https://github.com/gusdnd852
  */
-public abstract class BaseActivity<V extends ViewDataBinding, VM extends ViewModel>
-        extends UIExtension {
+public abstract class MVVMActivity<V extends ViewDataBinding, VM extends BaseViewModel> extends AppCompatActivity {
 
     protected V view;
+
     protected VM viewModel;
 
     @Override
@@ -28,6 +27,7 @@ public abstract class BaseActivity<V extends ViewDataBinding, VM extends ViewMod
         super.onCreate(savedInstanceState);
         view = DataBindingUtil.setContentView(this, injectView());
         viewModel = ViewModelFactory.createViewModel(this, injectViewModel());
+        view.setLifecycleOwner(this);
         view.setVariable(BR.viewModel, viewModel);
         view.setVariable(BR.activity, this);
     }
@@ -35,4 +35,5 @@ public abstract class BaseActivity<V extends ViewDataBinding, VM extends ViewMod
     protected abstract int injectView();
 
     protected abstract Class<VM> injectViewModel();
+
 }
