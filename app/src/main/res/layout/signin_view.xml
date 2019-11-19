@@ -36,8 +36,8 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/font"
                 android:gravity="center"
-                android:paddingTop="100dp"
-                android:paddingBottom="100dp"
+                android:paddingTop="90dp"
+                android:paddingBottom="90dp"
                 android:text="Sample App"
                 android:textColor="#555555"
                 android:textSize="35sp"
@@ -102,6 +102,7 @@
                     android:text="@={viewModel.pw}" />
             </LinearLayout>
 
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -112,9 +113,35 @@
                 android:fontFamily="@font/font"
                 android:gravity="center"
                 android:onClick="@{()->activity.signIn()}"
-                android:padding="10dp"
+                android:padding="5dp"
                 android:text="Sign In"
                 android:textSize="25sp" />
+
+
+            <LinearLayout
+                android:id="@+id/remember_field"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingTop="5dp"
+                android:weightSum="10">
+
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="@={viewModel.stay}"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/font"
+                    android:gravity="center"
+                    android:text="Stay signed in"
+                    android:textSize="19sp" />
+
+            </LinearLayout>
 
             <TextView
                 android:layout_width="match_parent"

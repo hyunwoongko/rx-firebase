@@ -1,6 +1,7 @@
 package com.hyunwoong.sample.base.task;
 
 import com.hyunwoong.sample.base.activity.BaseActivity;
+import com.hyunwoong.sample.util.Preference;
 
 /**
  * @author : Hyunwoong
@@ -28,6 +29,10 @@ public abstract class NavigatorTask {
 
             @Override public void requestPermissions(String... permissions) {
                 owner.requestPermissions(permissions);
+            }
+
+            @Override public Preference preference() {
+                return owner.preference();
             }
 
             @Override public void toast(String msg) {

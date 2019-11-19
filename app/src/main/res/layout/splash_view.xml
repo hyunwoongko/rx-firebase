@@ -32,6 +32,7 @@
             android:orientation="vertical">
 
             <TextView
+                onViewCreate="@{()->activity.splash()}"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/font"
@@ -39,9 +40,9 @@
                 android:paddingStart="10dp"
                 android:paddingEnd="10dp"
                 android:text="Sample App\n\n Splash"
+                android:textColor="#555555"
                 android:textSize="35sp"
-                android:textStyle="bold"
-                onViewCreate="@{()->activity.splash()}"/>
+                android:textStyle="bold" />
 
         </LinearLayout>
     </FrameLayout>

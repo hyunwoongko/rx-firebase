@@ -1,6 +1,7 @@
 package com.hyunwoong.sample.base.task;
 
 import com.hyunwoong.sample.base.activity.BaseActivity;
+import com.hyunwoong.sample.util.Preference;
 
 /**
  * @author : Hyunwoong
@@ -15,6 +16,8 @@ public interface Navigator {
     void moveAndFinish(Class<? extends BaseActivity> activity);
 
     void requestPermissions(String... permissions);
+
+    Preference preference();
 
     void toast(String msg);
 

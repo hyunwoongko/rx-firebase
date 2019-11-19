@@ -39,8 +39,9 @@
                 android:paddingStart="100dp"
                 android:paddingEnd="100dp"
                 android:text="Sample App"
+                android:textColor="#555555"
                 android:textSize="35sp"
-                android:textStyle="bold"></TextView>
+                android:textStyle="bold" />
 
         </LinearLayout>
     </FrameLayout>

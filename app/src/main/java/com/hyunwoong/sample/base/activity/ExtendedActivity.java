@@ -8,6 +8,7 @@ import androidx.databinding.ViewDataBinding;
 
 import com.hyunwoong.sample.R;
 import com.hyunwoong.sample.base.viwemodel.BaseViewModel;
+import com.hyunwoong.sample.util.Preference;
 
 /**
  * @author : Hyunwoong
@@ -18,6 +19,10 @@ public abstract class ExtendedActivity<V extends ViewDataBinding, VM extends Bas
 
     public void requestPermissions(String... permissions) {
         ActivityCompat.requestPermissions(this, permissions, 1);
+    }
+
+    public Preference preference() {
+        return Preference.getInstance(this);
     }
 
     @Override

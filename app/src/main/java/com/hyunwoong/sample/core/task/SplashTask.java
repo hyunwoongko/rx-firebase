@@ -5,6 +5,11 @@ import android.os.Handler;
 import com.hyunwoong.sample.base.activity.BaseActivity;
 import com.hyunwoong.sample.base.task.BaseTask;
 import com.hyunwoong.sample.core.activity.SignInActivity;
+import com.hyunwoong.sample.core.model.cache.UserCache;
+import com.hyunwoong.sample.core.model.entity.UserEntity;
+import com.hyunwoong.sample.util.Data;
+import com.hyunwoong.sample.util.Firebase;
+import com.hyunwoong.sample.util.StringChecker;
 
 
 /**
@@ -18,8 +23,25 @@ public class SplashTask extends BaseTask {
         super(owner);
     }
 
-    public void splash() {
+    private void moveScreen() {
         new Handler().postDelayed(() ->
-                moveAndFinish(SignInActivity.class), 3000);
+                moveAndFinish(SignInActivity.class), 2500);
+    }
+
+    private void processAutonomousSignIn(SignInTask signInTask) {
+        Firebase.reference("user")
+                .child(Firebase.uid())
+                .access(UserEntity.class)
+                .select(u -> {
+                    UserCache.getInstance().copy(u); // copy to cache
+                    signInTask.signIn(u, new Data<>(true));
+                });
+    }
+
+    public void splash(SignInTask signInTask) {
+        String remembered = preference().getString("id", null);
+
+        if (StringChecker.isEmpty(remembered)) moveScreen();
+        else processAutonomousSignIn(signInTask);
     }
 }

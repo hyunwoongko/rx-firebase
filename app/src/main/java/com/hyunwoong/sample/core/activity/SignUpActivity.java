@@ -29,9 +29,9 @@ public class SignUpActivity extends BaseActivity<SignUpView, SignUpViewModel> {
     @OnXML(resid = R.layout.signup_view)
     public void signUp() {
         UserEntity user = new UserEntity();
-        user.setId(viewModel.getId());
-        user.setPw(viewModel.getPw());
-        user.setName(viewModel.getName());
+        user.setId(viewModel.getId().getValue());
+        user.setPw(viewModel.getPw().getValue());
+        user.setName(viewModel.getName().getValue());
         signUpTask.signUp(user);
     }
 }

@@ -33,11 +33,9 @@ public class SignInActivity extends BaseActivity<SignInView, SignInViewModel> {
     @OnXML(resid = R.layout.signin_view)
     public void signIn() {
         UserEntity user = new UserEntity();
-        user.setId(viewModel.getId());
-        user.setPw(viewModel.getPw());
-
-        signInTask.signIn(user);
-
+        user.setId(viewModel.getId().getValue());
+        user.setPw(viewModel.getPw().getValue());
+        signInTask.signIn(user, viewModel.getStay());
     }
 
     @OnXML(resid = R.layout.signin_view)

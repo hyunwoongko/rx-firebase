@@ -6,7 +6,9 @@ import com.hyunwoong.sample.base.activity.BaseActivity;
 import com.hyunwoong.sample.base.task.BaseTask;
 import com.hyunwoong.sample.core.activity.MainActivity;
 import com.hyunwoong.sample.core.model.entity.UserEntity;
+import com.hyunwoong.sample.util.Data;
 import com.hyunwoong.sample.util.Firebase;
+import com.hyunwoong.sample.util.Preference;
 import com.hyunwoong.sample.util.StringChecker;
 
 /**
@@ -20,6 +22,18 @@ public class SignInTask extends BaseTask {
         super(owner);
     }
 
+    private void staySignedIn(Task<AuthResult> task, UserEntity user, Data<Boolean> stay) {
+        if (task.isSuccessful()) {
+            if (stay.getValue()) {
+                preference().setString("id", user.getId());
+                preference().setString("pw", user.getPw());
+            } else {
+                preference().setString("id", null);
+                preference().setString("pw", null);
+            }
+        }
+    }
+
     private void updateView(Task<AuthResult> task) {
         hideProgress();
         if (task.isSuccessful()) {
@@ -29,7 +43,7 @@ public class SignInTask extends BaseTask {
         }
     }
 
-    public void signIn(UserEntity user) {
+    public void signIn(UserEntity user, Data<Boolean> stay) {
         String id = user.getId();
         String pw = user.getPw();
         showProgress();
@@ -41,6 +55,9 @@ public class SignInTask extends BaseTask {
 
         else Firebase.auth()
                     .signInWithEmailAndPassword(id, pw)
-                    .addOnCompleteListener(this::updateView);
+                    .addOnCompleteListener(task -> {
+                        staySignedIn(task, user, stay); // 1. Stay Processing
+                        updateView(task); // 2. Update View
+                    });
     }
 }

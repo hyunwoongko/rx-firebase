@@ -6,6 +6,7 @@ import android.widget.Toast;
 import androidx.databinding.ViewDataBinding;
 
 import com.hyunwoong.sample.base.viwemodel.BaseViewModel;
+import com.hyunwoong.sample.util.Preference;
 
 /**
  * @author : Hyunwoong

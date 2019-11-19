@@ -11,20 +11,29 @@ import com.hyunwoong.sample.util.Data;
 public class SignInViewModel extends BaseViewModel {
     private Data<String> id = new Data<>();
     private Data<String> pw = new Data<>();
+    private Data<Boolean> stay = new Data<>();
 
-    public String getId() {
-        return id.getValue();
+    public Data<String> getId() {
+        return id;
     }
 
-    public String getPw() {
-        return pw.getValue();
+    public Data<String> getPw() {
+        return pw;
     }
 
-    public void setId(String id) {
-        this.id.setValue(id);
+    public Data<Boolean> getStay() {
+        return stay;
     }
 
-    public void setPw(String pw) {
-        this.pw.setValue(pw);
+    public void setId(Data<String> id) {
+        this.id = id;
+    }
+
+    public void setPw(Data<String> pw) {
+        this.pw = pw;
+    }
+
+    public void setStay(Data<Boolean> stay) {
+        this.stay = stay;
     }
 }

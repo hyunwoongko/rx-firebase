@@ -63,15 +63,17 @@ public final class Firebase {
 
         public <T> FirebaseProcessor<T> access(Class<T> clazz) {
             //RxJava Style
-            return new FirebaseProcessor<>(reference);
+            return new FirebaseProcessor<>(reference, clazz);
         }
     }
 
     public final static class FirebaseProcessor<T> {
         private DatabaseReference reference;
+        private Class<T> clazz;
 
-        private FirebaseProcessor(DatabaseReference reference) {
+        private FirebaseProcessor(DatabaseReference reference, Class<T> clazz) {
             this.reference = reference;
+            this.clazz = clazz;
         }
 
         public void insert(T val) {
@@ -86,7 +88,7 @@ public final class Firebase {
         public void select(Consumer<T> after) {
             reference.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    T t = (T) dataSnapshot;
+                    T t = dataSnapshot.getValue(clazz);
                     after.accept(t);
                 }
 

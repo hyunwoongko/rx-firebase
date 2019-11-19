@@ -13,27 +13,27 @@ public class SignUpViewModel extends BaseViewModel {
     private Data<String> pw = new Data<>();
     private Data<String> name = new Data<>();
 
-    public String getId() {
-        return id.getValue();
+    public Data<String> getId() {
+        return id;
     }
 
-    public String getPw() {
-        return pw.getValue();
+    public void setId(Data<String> id) {
+        this.id = id;
     }
 
-    public String getName() {
-        return name.getValue();
+    public Data<String> getPw() {
+        return pw;
     }
 
-    public void setId(String id) {
-        this.id.setValue(id);
+    public void setPw(Data<String> pw) {
+        this.pw = pw;
     }
 
-    public void setPw(String pw) {
-        this.pw.setValue(pw);
+    public Data<String> getName() {
+        return name;
     }
 
-    public void setName(String name) {
-        this.name.setValue(name);
+    public void setName(Data<String> name) {
+        this.name = name;
     }
 }
