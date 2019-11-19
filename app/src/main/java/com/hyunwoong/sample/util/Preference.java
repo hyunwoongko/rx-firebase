@@ -36,32 +36,32 @@ public class Preference {
                 .apply();
     }
 
-    public boolean getBoolean(String paramString, boolean paramBoolean) {
-        return mSharedPreference.getBoolean(paramString, paramBoolean);
+    public boolean getBoolean(String paramString) {
+        return mSharedPreference.getBoolean(paramString, false);
     }
 
     public double getDouble(String paramString) {
         return Double.longBitsToDouble(mSharedPreference.getLong(paramString, Double.doubleToRawLongBits(-1.0D)));
     }
 
-    public float getFloat(String paramString, float paramFloat) {
-        return mSharedPreference.getFloat(paramString, paramFloat);
+    public float getFloat(String paramString) {
+        return mSharedPreference.getFloat(paramString, -1);
     }
 
     public int getInt(String paramString) {
         return mSharedPreference.getInt(paramString, -1);
     }
 
-    public long getLong(String paramString, long paramLong) {
+    public long getLong(String paramString) {
         try {
-            return mSharedPreference.getLong(paramString, paramLong);
+            return mSharedPreference.getLong(paramString, -1);
         } catch (ClassCastException e) {
             return 0L;
         }
     }
 
-    public String getString(String paramString1, String paramString2) {
-        return mSharedPreference.getString(paramString1, paramString2);
+    public String getString(String paramString) {
+        return mSharedPreference.getString(paramString, null);
     }
 
     public boolean setBoolean(String paramString, boolean paramBoolean) {
