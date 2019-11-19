@@ -40,7 +40,7 @@ public class SignInTask extends BaseTask {
                 .access(UserEntity.class)
                 .select(u -> {
                     UserCache.getInstance().copy(u);
-                    updateView(task);
+                    updateView(task); // 3. Update View
                 });
     }
 
