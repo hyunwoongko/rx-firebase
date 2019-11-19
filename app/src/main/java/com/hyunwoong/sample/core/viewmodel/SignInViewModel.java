@@ -11,7 +11,7 @@ import com.hyunwoong.sample.util.Data;
 public class SignInViewModel extends BaseViewModel {
     private Data<String> id = new Data<>();
     private Data<String> pw = new Data<>();
-    private Data<Boolean> stay = new Data<>();
+    private Data<Boolean> stay = new Data<>(false);
 
     public Data<String> getId() {
         return id;

@@ -2,8 +2,11 @@ package com.hyunwoong.sample.core.activity;
 
 import com.hyunwoong.sample.R;
 import com.hyunwoong.sample.base.activity.BaseActivity;
+import com.hyunwoong.sample.core.model.cache.UserCache;
+import com.hyunwoong.sample.core.model.entity.UserEntity;
 import com.hyunwoong.sample.core.viewmodel.MainViewModel;
 import com.hyunwoong.sample.databinding.MainView;
+import com.hyunwoong.sample.util.OnXML;
 
 /**
  * @author : Hyunwoong
@@ -18,5 +21,15 @@ public class MainActivity extends BaseActivity<MainView, MainViewModel> {
 
     @Override protected Class<MainViewModel> injectViewModel() {
         return MainViewModel.class;
+    }
+
+    @OnXML(resid = R.layout.main_view)
+    public void showInfo() {
+        UserCache cache = UserCache.getInstance();
+        UserEntity user = cache.read();
+
+        viewModel.getId().setValue(user.getId());
+        viewModel.getName().setValue(user.getName());
+        viewModel.getPw().setValue(user.getPw());
     }
 }

@@ -20,6 +20,7 @@
 
 
         <LinearLayout
+            onViewCreate="@{()->activity.showInfo()}"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center"
@@ -39,9 +40,44 @@
                 android:paddingStart="100dp"
                 android:paddingEnd="100dp"
                 android:text="Sample App"
-                android:textColor="#555555"
-                android:textSize="35sp"
-                android:textStyle="bold" />
+                android:textSize="35sp" />
+
+            <TextView
+                android:id="@+id/email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="100dp"
+                android:fontFamily="@font/font"
+                android:gravity="center"
+                android:paddingStart="100dp"
+                android:paddingEnd="100dp"
+                android:text="@{viewModel.id}"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/pw"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/font"
+                android:gravity="center"
+                android:paddingStart="100dp"
+                android:paddingEnd="100dp"
+                android:text="@{viewModel.pw}"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/font"
+                android:gravity="center"
+                android:paddingStart="100dp"
+                android:paddingEnd="100dp"
+                android:text="@{viewModel.name}"
+                android:textSize="20sp" />
+
 
         </LinearLayout>
     </FrameLayout>

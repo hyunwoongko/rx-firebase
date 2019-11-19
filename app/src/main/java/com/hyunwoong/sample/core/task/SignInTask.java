@@ -5,10 +5,10 @@ import com.google.firebase.auth.AuthResult;
 import com.hyunwoong.sample.base.activity.BaseActivity;
 import com.hyunwoong.sample.base.task.BaseTask;
 import com.hyunwoong.sample.core.activity.MainActivity;
+import com.hyunwoong.sample.core.model.cache.UserCache;
 import com.hyunwoong.sample.core.model.entity.UserEntity;
 import com.hyunwoong.sample.util.Data;
 import com.hyunwoong.sample.util.Firebase;
-import com.hyunwoong.sample.util.Preference;
 import com.hyunwoong.sample.util.StringChecker;
 
 /**
@@ -34,6 +34,16 @@ public class SignInTask extends BaseTask {
         }
     }
 
+    private void addEntityToCache(Task<AuthResult> task, UserEntity user) {
+        Firebase.reference("user")
+                .child(Firebase.uid())
+                .access(UserEntity.class)
+                .select(u -> {
+                    UserCache.getInstance().copy(u);
+                    updateView(task);
+                });
+    }
+
     private void updateView(Task<AuthResult> task) {
         hideProgress();
         if (task.isSuccessful()) {
@@ -57,7 +67,7 @@ public class SignInTask extends BaseTask {
                     .signInWithEmailAndPassword(id, pw)
                     .addOnCompleteListener(task -> {
                         staySignedIn(task, user, stay); // 1. Stay Processing
-                        updateView(task); // 2. Update View
+                        addEntityToCache(task, user); // 2. Add Entity To Cache
                     });
     }
 }

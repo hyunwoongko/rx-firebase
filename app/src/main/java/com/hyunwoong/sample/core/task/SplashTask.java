@@ -7,7 +7,6 @@ import com.hyunwoong.sample.base.task.BaseTask;
 import com.hyunwoong.sample.core.activity.SignInActivity;
 import com.hyunwoong.sample.core.model.cache.UserCache;
 import com.hyunwoong.sample.core.model.entity.UserEntity;
-import com.hyunwoong.sample.util.Data;
 import com.hyunwoong.sample.util.Firebase;
 import com.hyunwoong.sample.util.StringChecker;
 
@@ -28,20 +27,20 @@ public class SplashTask extends BaseTask {
                 moveAndFinish(SignInActivity.class), 2500);
     }
 
-    private void processAutonomousSignIn(SignInTask signInTask) {
+    private void processAutonomousSignIn() {
         Firebase.reference("user")
                 .child(Firebase.uid())
                 .access(UserEntity.class)
                 .select(u -> {
                     UserCache.getInstance().copy(u); // copy to cache
-                    signInTask.signIn(u, new Data<>(true));
+                    Firebase.auth().signInWithEmailAndPassword(u.getId(), u.getPw()); // autonomous signed in
                 });
     }
 
-    public void splash(SignInTask signInTask) {
+    public void splash() {
         String remembered = preference().getString("id", null);
 
         if (StringChecker.isEmpty(remembered)) moveScreen();
-        else processAutonomousSignIn(signInTask);
+        else processAutonomousSignIn();
     }
 }

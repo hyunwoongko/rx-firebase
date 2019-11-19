@@ -35,6 +35,7 @@ public class SignInActivity extends BaseActivity<SignInView, SignInViewModel> {
         UserEntity user = new UserEntity();
         user.setId(viewModel.getId().getValue());
         user.setPw(viewModel.getPw().getValue());
+
         signInTask.signIn(user, viewModel.getStay());
     }
 

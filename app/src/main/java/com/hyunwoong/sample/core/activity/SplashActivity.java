@@ -1,9 +1,7 @@
 package com.hyunwoong.sample.core.activity;
 
-import com.google.android.gms.tasks.Task;
 import com.hyunwoong.sample.R;
 import com.hyunwoong.sample.base.activity.BaseActivity;
-import com.hyunwoong.sample.core.task.SignInTask;
 import com.hyunwoong.sample.core.task.SplashTask;
 import com.hyunwoong.sample.core.viewmodel.SplashViewModel;
 import com.hyunwoong.sample.databinding.SplashView;
@@ -18,7 +16,6 @@ import com.hyunwoong.sample.util.OnXML;
 public class SplashActivity extends BaseActivity<SplashView, SplashViewModel> {
 
     private SplashTask splashTask = TaskFactory.createTask(this, SplashTask.class);
-    private SignInTask signInTask = TaskFactory.createTask(this, SignInTask.class);
 
     @Override
     protected int injectView() {
@@ -32,6 +29,6 @@ public class SplashActivity extends BaseActivity<SplashView, SplashViewModel> {
 
     @OnXML(resid = R.layout.splash_view)
     public void splash() {
-        splashTask.splash(signInTask);
+        splashTask.splash();
     }
 }
