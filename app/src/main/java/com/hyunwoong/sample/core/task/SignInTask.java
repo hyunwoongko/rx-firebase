@@ -34,7 +34,7 @@ public class SignInTask extends BaseTask {
         }
     }
 
-    private void addEntityToCache(Task<AuthResult> task, UserEntity user) {
+    private void addEntityToCache(Task<AuthResult> task) {
         Firebase.reference("user")
                 .child(Firebase.uid())
                 .access(UserEntity.class)
@@ -67,7 +67,7 @@ public class SignInTask extends BaseTask {
                     .signInWithEmailAndPassword(id, pw)
                     .addOnCompleteListener(task -> {
                         staySignedIn(task, user, stay); // 1. Stay Processing
-                        addEntityToCache(task, user); // 2. Add Entity To Cache
+                        addEntityToCache(task); // 2. Add Entity To Cache
                     });
     }
 }
