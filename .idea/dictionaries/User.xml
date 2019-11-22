@@ -2,6 +2,7 @@
   <dictionary name="User">
     <words>
       <w>firebase</w>
+      <w>interactor</w>
     </words>
   </dictionary>
 </component>
