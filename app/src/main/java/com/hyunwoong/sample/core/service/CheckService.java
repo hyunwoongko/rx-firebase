@@ -11,15 +11,8 @@ import com.hyunwoong.sample.core.model.UserDto;
  */
 public class CheckService extends Service {
     private int minPw = 6;
-    private static CheckService instance;
 
-    public synchronized static CheckService getInstance(Controller controller) {
-        if (instance == null)
-            instance = new CheckService(controller);
-        return instance;
-    }
-
-    private CheckService(Controller owner) {
+    public CheckService(Controller owner) {
         super(owner);
     }
 

@@ -13,15 +13,8 @@ import com.hyunwoong.sample.util.Firebase;
  * @homepage : https://github.com/gusdnd852
  */
 public class AuthService extends Service {
-    private static AuthService instance;
 
-    public synchronized static AuthService getInstance(Controller controller) {
-        if (instance == null)
-            instance = new AuthService(controller);
-        return instance;
-    }
-
-    private AuthService(Controller owner) {
+    public AuthService(Controller owner) {
         super(owner);
     }
 

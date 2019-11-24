@@ -8,5 +8,4 @@ import com.hyunwoong.sample.base.View;
  * @homepage : https://github.com/gusdnd852
  */
 public class SplashView extends View {
-
 }

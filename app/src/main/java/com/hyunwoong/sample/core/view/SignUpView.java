@@ -9,8 +9,31 @@ import com.hyunwoong.sample.util.Data;
  * @homepage : https://github.com/gusdnd852
  */
 public class SignUpView extends View {
-    public Data<String> id = new Data<>();
-    public Data<String> pw = new Data<>();
-    public Data<String> name = new Data<>();
+    private Data<String> id = new Data<>();
+    private Data<String> pw = new Data<>();
+    private Data<String> name = new Data<>();
 
+    public Data<String> getId() {
+        return id;
+    }
+
+    public void setId(Data<String> id) {
+        this.id = id;
+    }
+
+    public Data<String> getPw() {
+        return pw;
+    }
+
+    public void setPw(Data<String> pw) {
+        this.pw = pw;
+    }
+
+    public Data<String> getName() {
+        return name;
+    }
+
+    public void setName(Data<String> name) {
+        this.name = name;
+    }
 }

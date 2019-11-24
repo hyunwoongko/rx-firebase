@@ -18,15 +18,8 @@ public class DBService extends Service {
 
     private final static String daoPackage = UserDao.class.getPackage().getName();
     private final static String dtoPackage = UserDto.class.getPackage().getName();
-    private static DBService instance;
 
-    public synchronized static DBService getInstance(Controller controller) {
-        if (instance == null)
-            instance = new DBService(controller);
-        return instance;
-    }
-
-    private DBService(Controller owner) {
+    public DBService(Controller owner) {
         super(owner);
     }
 

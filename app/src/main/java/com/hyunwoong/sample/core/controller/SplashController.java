@@ -19,9 +19,9 @@ import com.hyunwoong.sample.util.OnXML;
  */
 public class SplashController extends Controller<SplashBinding, SplashView> {
 
-    private AuthService auth = AuthService.getInstance(this);
-    private CheckService check = CheckService.getInstance(this);
-    private DBService db = DBService.getInstance(this);
+    private AuthService auth = new AuthService(this);
+    private CheckService check = new CheckService(this);
+    private DBService db = new DBService(this);
 
     public boolean isRemembered() {
         String remembered = preference().getString("id");
@@ -38,6 +38,7 @@ public class SplashController extends Controller<SplashBinding, SplashView> {
     }
 
     private void updateView(Task<AuthResult> task) {
+        hideProgress();
         if (task.isSuccessful()) {
             moveAndFinish(MainController.class);
         } else {
