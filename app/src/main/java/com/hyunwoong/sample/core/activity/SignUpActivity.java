@@ -23,8 +23,10 @@ public class SignUpActivity extends BaseActivity<SignUpView, SignUpViewModel> {
     }
 
     public void storeUserInformation(User user) {
+        String key = Strings.key(user.getId());
+
         RxFirebase.from("user")
-                .child(Strings.key(user.getId()))
+                .child(key)
                 .access(User.class)
                 .upload(user);
     }

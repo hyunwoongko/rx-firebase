@@ -34,9 +34,10 @@ public class SplashActivity extends BaseActivity<SplashView, SplashViewModel> {
 
     public void autonomousSignIn() {
         String id = preference().getString("id");
+        String key = Strings.key(id);
 
         RxFirebase.from("user")
-                .child(Strings.key(id))
+                .child(key)
                 .access(User.class)
                 .next(Cache::copyUser)
                 .next(this::signIn)

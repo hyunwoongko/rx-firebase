@@ -41,10 +41,10 @@ public class SignInActivity extends BaseActivity<SignInView, SignInViewModel> {
 
     public void cachedSignIn(boolean stay, User user) {
         this.showProgress();
-        String id = user.getId();
+        String key = Strings.key(user.getId());
 
         RxFirebase.from("user")
-                .child(Strings.key(id))
+                .child(key)
                 .access(User.class)
                 .next(Cache::copyUser)
                 .next(u -> signIn(stay, user))
