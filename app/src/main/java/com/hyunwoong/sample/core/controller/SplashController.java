@@ -26,7 +26,7 @@ public class SplashController extends Controller<SplashBinding, SplashView> {
                 moveAndFinish(SignInController.class), mills);
     }
 
-    public void updateView(User user) {
+    public void signIn(User user) {
         Firebase.signIn()
                 .success(u -> moveAndFinish(MainController.class))
                 .fail(u -> toast("로그인에 실패했습니다."))
@@ -39,7 +39,7 @@ public class SplashController extends Controller<SplashBinding, SplashView> {
         Dao.of(User.class)
                 .select(Dao.key(id))
                 .next(Cache::copyUser)
-                .next(this::updateView)
+                .next(this::signIn)
                 .subscribe();
     }
 }
