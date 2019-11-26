@@ -14,7 +14,9 @@ public class SplashViewModel extends BaseViewModel {
 
     @OnXML(resid = R.layout.splash)
     public void splash(SplashActivity activity) {
-        if (activity.isRemembered()) activity.autonomousSignIn();
+        if (activity.isRemembered())
+            activity.autonomousSignIn();
+
         else activity.delayAndMove(2500);
     }
 }
