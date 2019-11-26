@@ -5,7 +5,7 @@ import com.hyunwoong.sample.core.model.User;
 import com.hyunwoong.sample.core.view.SignInView;
 import com.hyunwoong.sample.databinding.SignInBinding;
 import com.hyunwoong.sample.util.data.Cache;
-import com.hyunwoong.sample.util.data.Firebase;
+import com.hyunwoong.sample.util.data.RxFirebase;
 import com.hyunwoong.sample.util.others.Strings;
 
 /**
@@ -32,7 +32,7 @@ public class SignInController extends Controller<SignInBinding, SignInView> {
     }
 
     public void signIn(boolean stay, User user) {
-        Firebase.signIn()
+        RxFirebase.signIn()
                 .success(u -> this.staySignedIn(stay, u))
                 .success(u -> moveAndFinish(MainController.class))
                 .fail(u -> hideAndToast("로그인에 실패했습니다."))
@@ -43,7 +43,7 @@ public class SignInController extends Controller<SignInBinding, SignInView> {
         this.showProgress();
         String id = user.getId();
 
-        Firebase.from("user")
+        RxFirebase.from("user")
                 .child(Strings.key(id))
                 .access(User.class)
                 .next(Cache::copyUser)

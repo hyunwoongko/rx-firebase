@@ -5,7 +5,7 @@ import com.hyunwoong.sample.core.model.User;
 import com.hyunwoong.sample.core.view.SplashView;
 import com.hyunwoong.sample.databinding.SplashBinding;
 import com.hyunwoong.sample.util.data.Cache;
-import com.hyunwoong.sample.util.data.Firebase;
+import com.hyunwoong.sample.util.data.RxFirebase;
 import com.hyunwoong.sample.util.others.Strings;
 
 /**
@@ -26,7 +26,7 @@ public class SplashController extends Controller<SplashBinding, SplashView> {
     }
 
     public void signIn(User user) {
-        Firebase.signIn()
+        RxFirebase.signIn()
                 .success(u -> moveAndFinish(MainController.class))
                 .fail(u -> toast("로그인에 실패했습니다."))
                 .subscribe(user);
@@ -35,7 +35,7 @@ public class SplashController extends Controller<SplashBinding, SplashView> {
     public void autonomousSignIn() {
         String id = preference().getString("id");
 
-        Firebase.from("user")
+        RxFirebase.from("user")
                 .child(Strings.key(id))
                 .access(User.class)
                 .next(Cache::copyUser)

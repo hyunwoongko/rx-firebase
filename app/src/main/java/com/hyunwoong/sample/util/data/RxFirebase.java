@@ -22,7 +22,7 @@ import java.util.List;
  * @when : 2019-11-18 오후 12:16
  * @homepage : https://github.com/gusdnd852
  */
-public final class Firebase {
+public final class RxFirebase {
     // RxJava Style Wrapper Class of FirebaseDatabase & Auth
 
     private static Accessor accessor = new Accessor();
