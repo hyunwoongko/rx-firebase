@@ -1,8 +1,7 @@
 package com.hyunwoong.sample.core.controller;
 
 import com.hyunwoong.sample.base.Controller;
-import com.hyunwoong.sample.base.Dao;
-import com.hyunwoong.sample.core.dto.User;
+import com.hyunwoong.sample.core.model.User;
 import com.hyunwoong.sample.core.view.SplashView;
 import com.hyunwoong.sample.databinding.SplashBinding;
 import com.hyunwoong.sample.util.data.Cache;
@@ -36,8 +35,9 @@ public class SplashController extends Controller<SplashBinding, SplashView> {
     public void autonomousSignIn() {
         String id = preference().getString("id");
 
-        Dao.of(User.class)
-                .select(Dao.key(id))
+        Firebase.from("user")
+                .child(Strings.key(id))
+                .access(User.class)
                 .next(Cache::copyUser)
                 .next(this::signIn)
                 .subscribe();

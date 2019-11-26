@@ -1,10 +1,6 @@
 package com.hyunwoong.sample.util.data;
 
-import com.hyunwoong.sample.base.Dao;
-import com.hyunwoong.sample.core.dto.User;
-
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
+import com.hyunwoong.sample.core.model.User;
 
 /**
  * @author : Hyunwoong
@@ -13,12 +9,7 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 @SuppressWarnings("unchecked")
 public class Cache {
-    private static Map<String, Dao> dao = new ConcurrentHashMap<>();
     private static User user = new User();
-
-    public static Map<String, Dao> readDao() {
-        return Cache.dao;
-    }
 
     public static void copyUser(User user) {
         Cache.user = user;

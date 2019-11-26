@@ -1,8 +1,7 @@
 package com.hyunwoong.sample.core.controller;
 
 import com.hyunwoong.sample.base.Controller;
-import com.hyunwoong.sample.base.Dao;
-import com.hyunwoong.sample.core.dto.User;
+import com.hyunwoong.sample.core.model.User;
 import com.hyunwoong.sample.core.view.SignUpView;
 import com.hyunwoong.sample.databinding.SignUpBinding;
 import com.hyunwoong.sample.util.data.Firebase;
@@ -24,15 +23,18 @@ public class SignUpController extends Controller<SignUpBinding, SignUpView> {
     }
 
     public void storeUserInformation(User user) {
-        Dao.of(User.class).insert(user);
+        Firebase.from("user")
+                .child(Strings.key(user.getId()))
+                .access(User.class)
+                .upload(user);
     }
 
     public void signUp(User user) {
         Firebase.signUp()
                 .success(this::storeUserInformation)
-                .success(u -> toast("회원가입에 성공했습니다."))
+                .success(u -> hideAndToast("회원가입에 성공했습니다."))
                 .success(u -> moveAndFinish(SignInController.class))
-                .fail(u -> toast("회원가입에 실패했습니다."))
+                .fail(u -> hideAndToast("회원가입에 실패했습니다."))
                 .subscribe(user);
     }
 

@@ -1,8 +1,7 @@
 package com.hyunwoong.sample.core.controller;
 
 import com.hyunwoong.sample.base.Controller;
-import com.hyunwoong.sample.base.Dao;
-import com.hyunwoong.sample.core.dto.User;
+import com.hyunwoong.sample.core.model.User;
 import com.hyunwoong.sample.core.view.SignInView;
 import com.hyunwoong.sample.databinding.SignInBinding;
 import com.hyunwoong.sample.util.data.Cache;
@@ -36,15 +35,16 @@ public class SignInController extends Controller<SignInBinding, SignInView> {
         Firebase.signIn()
                 .success(u -> this.staySignedIn(stay, u))
                 .success(u -> moveAndFinish(MainController.class))
-                .fail(u -> toast("로그인에 실패했습니다."))
+                .fail(u -> hideAndToast("로그인에 실패했습니다."))
                 .subscribe(user);
     }
 
     public void cachedSignIn(boolean stay, User user) {
         String id = user.getId();
 
-        Dao.of(User.class)
-                .select(Dao.key(id))
+        Firebase.from("user")
+                .child(Strings.key(id))
+                .access(User.class)
                 .next(Cache::copyUser)
                 .next(u -> signIn(stay, user))
                 .subscribe();

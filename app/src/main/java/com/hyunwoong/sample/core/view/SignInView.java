@@ -4,7 +4,7 @@ import com.hyunwoong.sample.R;
 import com.hyunwoong.sample.base.View;
 import com.hyunwoong.sample.core.controller.SignInController;
 import com.hyunwoong.sample.core.controller.SignUpController;
-import com.hyunwoong.sample.core.dto.User;
+import com.hyunwoong.sample.core.model.User;
 import com.hyunwoong.sample.util.data.Data;
 import com.hyunwoong.sample.util.view.OnXML;
 

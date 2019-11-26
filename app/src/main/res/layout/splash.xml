@@ -13,6 +13,7 @@
 
     </data>
 
+
     <FrameLayout
         onViewCreate="@{()->view.splash(controller)}"
         android:layout_width="match_parent"
