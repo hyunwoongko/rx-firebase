@@ -24,10 +24,7 @@ public class SignUpView extends View {
         user.setPw(pw.get());
         user.setName(name.get());
 
-        if (ctrl.check(user)) {
-            this.showProgress();
+        if (ctrl.check(user))
             ctrl.signUp(user);
-        }
     }
-
 }

@@ -40,6 +40,7 @@ public class SignInController extends Controller<SignInBinding, SignInView> {
     }
 
     public void cachedSignIn(boolean stay, User user) {
+        this.showProgress();
         String id = user.getId();
 
         Firebase.from("user")

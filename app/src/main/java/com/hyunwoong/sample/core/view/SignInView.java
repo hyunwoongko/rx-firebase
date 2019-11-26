@@ -24,10 +24,8 @@ public class SignInView extends View {
         user.setId(id.get());
         user.setPw(pw.get());
 
-        if (ctrl.check(user)){
-            this.showProgress();
+        if (ctrl.check(user))
             ctrl.cachedSignIn(stay.get(), user);
-        }
     }
 
     @OnXML(resid = R.layout.sign_in)

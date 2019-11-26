@@ -30,6 +30,7 @@ public class SignUpController extends Controller<SignUpBinding, SignUpView> {
     }
 
     public void signUp(User user) {
+        this.showProgress();
         Firebase.signUp()
                 .success(this::storeUserInformation)
                 .success(u -> hideAndToast("회원가입에 성공했습니다."))
