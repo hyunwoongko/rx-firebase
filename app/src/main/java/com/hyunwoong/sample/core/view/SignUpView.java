@@ -1,7 +1,11 @@
 package com.hyunwoong.sample.core.view;
 
+import com.hyunwoong.sample.R;
 import com.hyunwoong.sample.base.View;
-import com.hyunwoong.sample.util.Data;
+import com.hyunwoong.sample.core.controller.SignUpController;
+import com.hyunwoong.sample.core.dto.User;
+import com.hyunwoong.sample.util.data.Data;
+import com.hyunwoong.sample.util.view.OnXML;
 
 /**
  * @author : Hyunwoong
@@ -9,31 +13,21 @@ import com.hyunwoong.sample.util.Data;
  * @homepage : https://github.com/gusdnd852
  */
 public class SignUpView extends View {
-    private Data<String> id = new Data<>();
-    private Data<String> pw = new Data<>();
-    private Data<String> name = new Data<>();
+    public Data<String> id = new Data<>();
+    public Data<String> pw = new Data<>();
+    public Data<String> name = new Data<>();
 
-    public Data<String> getId() {
-        return id;
+    @OnXML(resid = R.layout.sign_up)
+    public void signUp(SignUpController ctrl) {
+        User user = new User();
+        user.setId(id.get());
+        user.setPw(pw.get());
+        user.setName(name.get());
+
+        if (ctrl.check(user)) {
+            this.showProgress();
+            ctrl.signUp(user);
+        }
     }
 
-    public void setId(Data<String> id) {
-        this.id = id;
-    }
-
-    public Data<String> getPw() {
-        return pw;
-    }
-
-    public void setPw(Data<String> pw) {
-        this.pw = pw;
-    }
-
-    public Data<String> getName() {
-        return name;
-    }
-
-    public void setName(Data<String> name) {
-        this.name = name;
-    }
 }

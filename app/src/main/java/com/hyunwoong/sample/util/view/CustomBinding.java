@@ -1,4 +1,4 @@
-package com.hyunwoong.sample.util;
+package com.hyunwoong.sample.util.view;
 
 import android.view.View;
 
@@ -9,7 +9,7 @@ import androidx.databinding.BindingAdapter;
  * @when : 2019-11-15 오후 7:19
  * @homepage : https://github.com/gusdnd852
  */
-public class Binder {
+public class CustomBinding {
 //커스텀 뷰 어트리뷰트를 관리하기 위한 클래스
 
     @BindingAdapter("onViewCreate")

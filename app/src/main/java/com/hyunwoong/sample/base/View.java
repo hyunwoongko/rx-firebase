@@ -2,7 +2,7 @@ package com.hyunwoong.sample.base;
 
 import androidx.lifecycle.ViewModel;
 
-import com.hyunwoong.sample.util.Data;
+import com.hyunwoong.sample.util.data.Data;
 
 /**
  * @author : Hyunwoong

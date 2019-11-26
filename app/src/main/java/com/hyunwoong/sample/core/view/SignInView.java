@@ -1,7 +1,12 @@
 package com.hyunwoong.sample.core.view;
 
+import com.hyunwoong.sample.R;
 import com.hyunwoong.sample.base.View;
-import com.hyunwoong.sample.util.Data;
+import com.hyunwoong.sample.core.controller.SignInController;
+import com.hyunwoong.sample.core.controller.SignUpController;
+import com.hyunwoong.sample.core.dto.User;
+import com.hyunwoong.sample.util.data.Data;
+import com.hyunwoong.sample.util.view.OnXML;
 
 /**
  * @author : Hyunwoong
@@ -9,31 +14,24 @@ import com.hyunwoong.sample.util.Data;
  * @homepage : https://github.com/gusdnd852
  */
 public class SignInView extends View {
-    private Data<String> id = new Data<>();
-    private Data<String> pw = new Data<>();
-    private Data<Boolean> stay = new Data<>(false);
+    public Data<String> id = new Data<>();
+    public Data<String> pw = new Data<>();
+    public Data<Boolean> stay = new Data<>(false);
 
-    public Data<String> getId() {
-        return id;
+    @OnXML(resid = R.layout.sign_in)
+    public void signIn(SignInController ctrl) {
+        User user = new User();
+        user.setId(id.get());
+        user.setPw(pw.get());
+
+        if (ctrl.check(user)){
+            this.showProgress();
+            ctrl.cachedSignIn(stay.get(), user);
+        }
     }
 
-    public void setId(Data<String> id) {
-        this.id = id;
-    }
-
-    public Data<String> getPw() {
-        return pw;
-    }
-
-    public void setPw(Data<String> pw) {
-        this.pw = pw;
-    }
-
-    public Data<Boolean> getStay() {
-        return stay;
-    }
-
-    public void setStay(Data<Boolean> stay) {
-        this.stay = stay;
+    @OnXML(resid = R.layout.sign_in)
+    public void moveToSignUp(SignInController ctrl) {
+        ctrl.move(SignUpController.class);
     }
 }

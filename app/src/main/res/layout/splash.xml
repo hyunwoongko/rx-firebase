@@ -14,7 +14,7 @@
     </data>
 
     <FrameLayout
-        onViewCreate="@{()->controller.splash()}"
+        onViewCreate="@{()->view.splash(controller)}"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/back_sign_in">

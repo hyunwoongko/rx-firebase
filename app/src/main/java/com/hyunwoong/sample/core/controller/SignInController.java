@@ -1,16 +1,13 @@
 package com.hyunwoong.sample.core.controller;
 
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.hyunwoong.sample.base.Controller;
-import com.hyunwoong.sample.core.model.UserDto;
-import com.hyunwoong.sample.core.service.AuthService;
-import com.hyunwoong.sample.core.service.CheckService;
-import com.hyunwoong.sample.core.service.CheckService.Component;
-import com.hyunwoong.sample.core.service.DBService;
+import com.hyunwoong.sample.base.Dao;
+import com.hyunwoong.sample.core.dto.User;
 import com.hyunwoong.sample.core.view.SignInView;
 import com.hyunwoong.sample.databinding.SignInBinding;
-import com.hyunwoong.sample.util.Data;
+import com.hyunwoong.sample.util.data.Cache;
+import com.hyunwoong.sample.util.data.Firebase;
+import com.hyunwoong.sample.util.others.Strings;
 
 /**
  * @author : Hyunwoong
@@ -19,24 +16,37 @@ import com.hyunwoong.sample.util.Data;
  */
 public class SignInController extends Controller<SignInBinding, SignInView> {
 
-    private AuthService auth = new AuthService(this);
-    private CheckService check = new CheckService(this);
-    private DBService db = new DBService(this);
+    public boolean check(User user) {
+        if (Strings.empty(user.getId())) return hideAndToast("아이디를 입력해주세요.");
+        else if (Strings.empty(user.getPw())) return hideAndToast("비밀번호를 입력해주세요.");
+        else return true;
+    }
 
-    private void staySignedIn(Task<AuthResult> task, UserDto user, Data<Boolean> stay) {
-        if (task.isSuccessful()) {
-            if (stay.getValue()) {
-                preference().setString("id", user.getId());
-                preference().setString("pw", user.getPw());
-            } else {
-                preference().setString("id", null);
-                preference().setString("pw", null);
-            }
+    public void staySignedIn(boolean stay, User user) {
+        if (stay) {
+            preference().setString("id", user.getId());
+            preference().setString("pw", user.getPw());
+        } else {
+            preference().setString("id", null);
+            preference().setString("pw", null);
         }
     }
 
+    public void signIn(boolean stay, User user) {
+        Firebase.signIn()
+                .success(u -> this.staySignedIn(stay, u))
+                .success(u -> moveAndFinish(MainController.class))
+                .fail(u -> toast("로그인에 실패했습니다."))
+                .subscribe(user);
+    }
 
-    private boolean checkUser(UserDto user) {
-        return check.isOk(user, Component.id, Component.pw);
+    public void cachedSignIn(boolean stay, User user) {
+        String id = user.getId();
+
+        Dao.of(User.class)
+                .select(Dao.key(id))
+                .next(Cache::copyUser)
+                .next(u -> signIn(stay, user))
+                .subscribe();
     }
 }

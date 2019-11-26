@@ -1,16 +1,13 @@
 package com.hyunwoong.sample.core.controller;
 
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
-import com.hyunwoong.sample.R;
 import com.hyunwoong.sample.base.Controller;
-import com.hyunwoong.sample.core.model.UserDto;
-import com.hyunwoong.sample.core.service.AuthService;
-import com.hyunwoong.sample.core.service.CheckService;
-import com.hyunwoong.sample.core.service.DBService;
+import com.hyunwoong.sample.base.Dao;
+import com.hyunwoong.sample.core.dto.User;
 import com.hyunwoong.sample.core.view.SplashView;
 import com.hyunwoong.sample.databinding.SplashBinding;
-import com.hyunwoong.sample.util.OnXML;
+import com.hyunwoong.sample.util.data.Cache;
+import com.hyunwoong.sample.util.data.Firebase;
+import com.hyunwoong.sample.util.others.Strings;
 
 /**
  * @author : Hyunwoong
@@ -19,36 +16,30 @@ import com.hyunwoong.sample.util.OnXML;
  */
 public class SplashController extends Controller<SplashBinding, SplashView> {
 
-    private AuthService auth = new AuthService(this);
-    private CheckService check = new CheckService(this);
-    private DBService db = new DBService(this);
-
     public boolean isRemembered() {
         String remembered = preference().getString("id");
-        return !check.isEmpty(remembered);
+        return remembered != null;
     }
 
-    private void delayAndMove(int mills) {
-        handler.postDelayed(() -> moveAndFinish(SignInController.class), mills);
+    public void delayAndMove(int mills) {
+        handler.postDelayed(() ->
+                moveAndFinish(SignInController.class), mills);
     }
 
-    private void autonomousSignIn() {
-        db.of(UserDto.class).select(user ->
-                auth.signIn(user, this::updateView), true);
+    public void updateView(User user) {
+        Firebase.signIn()
+                .success(u -> moveAndFinish(MainController.class))
+                .fail(u -> toast("로그인에 실패했습니다."))
+                .subscribe(user);
     }
 
-    private void updateView(Task<AuthResult> task) {
-        hideProgress();
-        if (task.isSuccessful()) {
-            moveAndFinish(MainController.class);
-        } else {
-            toast("로그인에 실패했습니다.");
-        }
-    }
+    public void autonomousSignIn() {
+        String id = preference().getString("id");
 
-    @OnXML(resid = R.layout.splash)
-    public void splash() {
-        if (isRemembered()) autonomousSignIn();
-        else delayAndMove(2500);
+        Dao.of(User.class)
+                .select(Dao.key(id))
+                .next(Cache::copyUser)
+                .next(this::updateView)
+                .subscribe();
     }
 }

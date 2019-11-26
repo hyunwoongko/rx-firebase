@@ -1,13 +1,13 @@
-package com.hyunwoong.sample.core.model;
+package com.hyunwoong.sample.core.dto;
 
-import com.hyunwoong.sample.base.Dto;
+import com.hyunwoong.sample.base.Entity;
 
 /**
  * @author : Hyunwoong
  * @when : 2019-11-15 오후 3:13
  * @homepage : https://github.com/gusdnd852
  */
-public class UserDto extends Dto {
+public class User extends Entity {
     private String id;
     private String pw;
     private String name;

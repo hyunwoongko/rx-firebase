@@ -1,4 +1,4 @@
-package com.hyunwoong.sample.util;
+package com.hyunwoong.sample.util.view;
 
 /**
  * @author : Hyunwoong

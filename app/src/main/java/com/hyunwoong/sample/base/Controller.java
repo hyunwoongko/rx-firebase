@@ -1,6 +1,5 @@
 package com.hyunwoong.sample.base;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -19,7 +18,7 @@ import androidx.lifecycle.ViewModelProvider.NewInstanceFactory;
 
 import com.hyunwoong.sample.BR;
 import com.hyunwoong.sample.R;
-import com.hyunwoong.sample.util.Preference;
+import com.hyunwoong.sample.util.data.Preference;
 
 import java.lang.reflect.ParameterizedType;
 
@@ -31,9 +30,9 @@ import java.lang.reflect.ParameterizedType;
 @SuppressWarnings("unchecked")
 public abstract class Controller<B extends ViewDataBinding, V extends View> extends AppCompatActivity {
 
-    protected Handler handler = new Handler();
     protected B binding;
     protected V view;
+    protected Handler handler = new Handler();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -64,7 +63,8 @@ public abstract class Controller<B extends ViewDataBinding, V extends View> exte
             String className = ((ParameterizedType) getClass()
                     .getGenericSuperclass())
                     .getActualTypeArguments()[1]
-                    .toString();
+                    .toString()
+                    .split(" ")[1];
 
             Class<V> clazz = (Class<V>) Class.forName(className);
             NewInstanceFactory factory = new NewInstanceFactory();
@@ -94,11 +94,11 @@ public abstract class Controller<B extends ViewDataBinding, V extends View> exte
         overridePendingTransition(R.anim.activity_fadein, R.anim.activity_fadeout);
     }
 
-    public void move(Class<? extends Activity> activity) {
+    public void move(Class<? extends android.app.Activity> activity) {
         startActivity(new Intent(this, activity));
     }
 
-    public void moveAndFinish(Class<? extends Activity> activity) {
+    public void moveAndFinish(Class<? extends android.app.Activity> activity) {
         move(activity);
         finish();
     }
@@ -127,8 +127,9 @@ public abstract class Controller<B extends ViewDataBinding, V extends View> exte
         view.hideProgress();
     }
 
-    public void hideAndToast(String msg) {
+    public boolean hideAndToast(String msg) {
         hideProgress();
         toast(msg);
+        return false;
     }
 }
