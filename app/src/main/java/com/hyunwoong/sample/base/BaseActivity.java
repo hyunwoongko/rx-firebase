@@ -28,19 +28,20 @@ import java.lang.reflect.ParameterizedType;
  * @homepage : https://github.com/gusdnd852
  */
 @SuppressWarnings("unchecked")
-public abstract class Controller<B extends ViewDataBinding, V extends View> extends AppCompatActivity {
+public abstract class BaseActivity<V extends ViewDataBinding, VM extends BaseViewModel> extends AppCompatActivity {
 
     protected Handler handler = new Handler();
-    private V view;
+    protected VM viewModel;
+    protected V view;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        B binding = DataBindingUtil.setContentView(this, readXml());
-        view = createView();
-        binding.setLifecycleOwner(this);
-        binding.setVariable(BR.view, view);
-        binding.setVariable(BR.controller, this);
+        view = DataBindingUtil.setContentView(this, readXml());
+        viewModel = createViewModel();
+        view.setLifecycleOwner(this);
+        view.setVariable(BR.viewModel, viewModel);
+        view.setVariable(BR.activity, this);
     }
 
     private int readXml() {
@@ -57,7 +58,7 @@ public abstract class Controller<B extends ViewDataBinding, V extends View> exte
         }
     }
 
-    private V createView() {
+    private VM createViewModel() {
         try {
             String className = ((ParameterizedType) getClass()
                     .getGenericSuperclass())
@@ -65,7 +66,7 @@ public abstract class Controller<B extends ViewDataBinding, V extends View> exte
                     .toString()
                     .split(" ")[1];
 
-            Class<V> clazz = (Class<V>) Class.forName(className);
+            Class<VM> clazz = (Class<VM>) Class.forName(className);
             NewInstanceFactory factory = new NewInstanceFactory();
             return new ViewModelProvider(this, factory).get(clazz);
         } catch (Exception e) {
@@ -119,11 +120,11 @@ public abstract class Controller<B extends ViewDataBinding, V extends View> exte
     }
 
     public void showProgress() {
-        view.showProgress();
+        viewModel.showProgress();
     }
 
     public void hideProgress() {
-        view.hideProgress();
+        viewModel.hideProgress();
     }
 
     public boolean hideAndToast(String msg) {

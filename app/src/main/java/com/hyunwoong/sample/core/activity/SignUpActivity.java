@@ -1,9 +1,9 @@
-package com.hyunwoong.sample.core.controller;
+package com.hyunwoong.sample.core.activity;
 
-import com.hyunwoong.sample.base.Controller;
+import com.hyunwoong.sample.base.BaseActivity;
 import com.hyunwoong.sample.core.model.User;
-import com.hyunwoong.sample.core.view.SignUpView;
-import com.hyunwoong.sample.databinding.SignUpBinding;
+import com.hyunwoong.sample.core.viewmodel.SignUpViewModel;
+import com.hyunwoong.sample.databinding.SignUpView;
 import com.hyunwoong.sample.util.data.RxFirebase;
 import com.hyunwoong.sample.util.others.Strings;
 
@@ -12,7 +12,7 @@ import com.hyunwoong.sample.util.others.Strings;
  * @when : 2019-11-18 오전 12:51
  * @homepage : https://github.com/gusdnd852
  */
-public class SignUpController extends Controller<SignUpBinding, SignUpView> {
+public class SignUpActivity extends BaseActivity<SignUpView, SignUpViewModel> {
 
     public boolean check(User user) {
         if (Strings.empty(user.getId())) return hideAndToast("아이디를 입력해주세요.");
@@ -34,7 +34,7 @@ public class SignUpController extends Controller<SignUpBinding, SignUpView> {
         RxFirebase.signUp()
                 .success(this::storeUserInformation)
                 .success(u -> hideAndToast("회원가입에 성공했습니다."))
-                .success(u -> moveAndFinish(SignInController.class))
+                .success(u -> moveAndFinish(SignInActivity.class))
                 .fail(u -> hideAndToast("회원가입에 실패했습니다."))
                 .subscribe(user);
     }

@@ -15,7 +15,7 @@
         tools:replace="android:appComponentFactory">
 
         <!-- initial activity -->
-        <activity android:name=".core.controller.SplashController">
+        <activity android:name=".core.activity.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -26,20 +26,20 @@
         </activity>
 
         <!-- activities -->
-        <activity android:name=".core.controller.SignInController">
+        <activity android:name=".core.activity.SignInActivity">
             <meta-data
                 android:name="layout"
                 android:value="@layout/sign_in" />
         </activity>
 
-        <activity android:name=".core.controller.SignUpController">
+        <activity android:name=".core.activity.SignUpActivity">
             <meta-data
                 android:name="layout"
                 android:value="@layout/sign_up" />
         </activity>
 
 
-        <activity android:name=".core.controller.MainController">
+        <activity android:name=".core.activity.MainActivity">
             <meta-data
                 android:name="layout"
                 android:value="@layout/main" />

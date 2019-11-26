@@ -1,25 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <data>
+    <data class="SplashView">
 
         <variable
-            name="view"
-            type="com.hyunwoong.sample.core.view.SplashView" />
+            name="viewModel"
+            type="com.hyunwoong.sample.core.viewmodel.SplashViewModel" />
 
         <variable
-            name="controller"
-            type="com.hyunwoong.sample.core.controller.SplashController" />
+            name="activity"
+            type="com.hyunwoong.sample.core.activity.SplashActivity" />
 
     </data>
 
 
     <FrameLayout
-        onViewCreate="@{()->view.splash(controller)}"
+        onViewCreate="@{()->viewModel.splash(activity)}"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/back_sign_in">
-
 
         <LinearLayout
             android:layout_width="match_parent"

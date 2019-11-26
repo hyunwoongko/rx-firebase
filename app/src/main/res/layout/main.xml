@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <data>
+    <data class="MainView">
 
         <variable
-            name="view"
-            type="com.hyunwoong.sample.core.view.MainView" />
+            name="viewModel"
+            type="com.hyunwoong.sample.core.viewmodel.MainViewModel" />
 
         <variable
-            name="controller"
-            type="com.hyunwoong.sample.core.controller.MainController" />
+            name="activity"
+            type="com.hyunwoong.sample.core.activity.MainActivity" />
 
     </data>
 
@@ -17,7 +17,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/back_sign_in"
-        onViewCreate="@{()->view.showInformation(controller)}">
+        onViewCreate="@{()->viewModel.showInformation(activity)}">
 
 
         <LinearLayout
@@ -47,7 +47,7 @@
                 android:layout_marginTop="80dp"
                 android:fontFamily="@font/font"
                 android:gravity="center"
-                android:text="@{view.greeting}"
+                android:text="@{viewModel.greeting}"
                 android:textSize="20sp" />
 
 

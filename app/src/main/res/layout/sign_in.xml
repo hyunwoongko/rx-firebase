@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <data>
+    <data class="SignInView">
 
         <variable
-            name="view"
-            type="com.hyunwoong.sample.core.view.SignInView" />
+            name="viewModel"
+            type="com.hyunwoong.sample.core.viewmodel.SignInViewModel" />
 
         <variable
-            name="controller"
-            type="com.hyunwoong.sample.core.controller.SignInController" />
+            name="activity"
+            type="com.hyunwoong.sample.core.activity.SignInActivity" />
 
     </data>
 
@@ -17,7 +17,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/back_sign_in">
-
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -70,7 +69,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="8"
                     android:inputType="textEmailAddress"
-                    android:text="@={view.id}" />
+                    android:text="@={viewModel.id}" />
             </LinearLayout>
 
 
@@ -99,7 +98,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="8"
                     android:inputType="textPassword"
-                    android:text="@={view.pw}" />
+                    android:text="@={viewModel.pw}" />
             </LinearLayout>
 
 
@@ -114,7 +113,7 @@
                 android:gravity="center"
                 android:padding="5dp"
                 android:text="Sign In"
-                android:onClick="@{()->view.signIn(controller)}"
+                android:onClick="@{()->viewModel.signIn(activity)}"
                 android:textSize="25sp" />
 
 
@@ -131,7 +130,7 @@
                 <CheckBox
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:checked="@={view.stay}" />
+                    android:checked="@={viewModel.stay}" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -175,7 +174,7 @@
                     android:text="here"
                     android:textColor="#555555"
                     android:textSize="19sp"
-                    android:onClick="@{()->view.moveToSignUp(controller)}"
+                    android:onClick="@{()->viewModel.moveToSignUp(activity)}"
                     android:textStyle="bold" />
 
                 <TextView
@@ -194,7 +193,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginBottom="90dp"
-            android:visibility="@{view.progressBar}" />
+            android:visibility="@{viewModel.progressBar}" />
 
     </FrameLayout>
 </layout>

@@ -9,7 +9,7 @@ import com.hyunwoong.sample.util.data.Data;
  * @when : 2019-11-18 오후 2:33
  * @homepage : https://github.com/gusdnd852
  */
-public abstract class View extends ViewModel {
+public abstract class BaseViewModel extends ViewModel {
     public Data<Integer> progressBar = new Data<>(android.view.View.GONE);
 
     public void showProgress() {

@@ -1,13 +1,11 @@
 package com.hyunwoong.sample.core.model;
 
-import com.hyunwoong.sample.base.Model;
-
 /**
  * @author : Hyunwoong
  * @when : 2019-11-15 오후 3:13
  * @homepage : https://github.com/gusdnd852
  */
-public class User extends Model {
+public class User {
     private String id;
     private String pw;
     private String name;

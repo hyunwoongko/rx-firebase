@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <data>
+    <data class="SignUpView">
 
         <variable
-            name="view"
-            type="com.hyunwoong.sample.core.view.SignUpView" />
+            name="viewModel"
+            type="com.hyunwoong.sample.core.viewmodel.SignUpViewModel" />
 
         <variable
-            name="controller"
-            type="com.hyunwoong.sample.core.controller.SignUpController" />
+            name="activity"
+            type="com.hyunwoong.sample.core.activity.SignUpActivity" />
 
     </data>
 
@@ -70,7 +70,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="8"
                     android:inputType="textEmailAddress"
-                    android:text="@={view.id}" />
+                    android:text="@={viewModel.id}" />
             </LinearLayout>
 
 
@@ -99,7 +99,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="8"
                     android:inputType="textPassword"
-                    android:text="@={view.pw}" />
+                    android:text="@={viewModel.pw}" />
             </LinearLayout>
 
             <LinearLayout
@@ -127,7 +127,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="8"
                     android:inputType="text"
-                    android:text="@={view.name}" />
+                    android:text="@={viewModel.name}" />
             </LinearLayout>
 
             <TextView
@@ -141,7 +141,7 @@
                 android:gravity="center"
                 android:padding="10dp"
                 android:text="Sign Up"
-                android:onClick="@{()->view.signUp(controller)}"
+                android:onClick="@{()->viewModel.signUp(activity)}"
                 android:textSize="25sp" />
 
         </LinearLayout>
@@ -151,7 +151,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginBottom="40dp"
-            android:visibility="@{view.progressBar}" />
+            android:visibility="@{viewModel.progressBar}" />
 
     </FrameLayout>
 </layout>

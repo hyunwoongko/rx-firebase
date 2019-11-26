@@ -1,9 +1,9 @@
-package com.hyunwoong.sample.core.controller;
+package com.hyunwoong.sample.core.activity;
 
-import com.hyunwoong.sample.base.Controller;
+import com.hyunwoong.sample.base.BaseActivity;
 import com.hyunwoong.sample.core.model.User;
-import com.hyunwoong.sample.core.view.SignInView;
-import com.hyunwoong.sample.databinding.SignInBinding;
+import com.hyunwoong.sample.core.viewmodel.SignInViewModel;
+import com.hyunwoong.sample.databinding.SignInView;
 import com.hyunwoong.sample.util.data.Cache;
 import com.hyunwoong.sample.util.data.RxFirebase;
 import com.hyunwoong.sample.util.others.Strings;
@@ -13,7 +13,7 @@ import com.hyunwoong.sample.util.others.Strings;
  * @when : 2019-11-15 오후 3:12
  * @homepage : https://github.com/gusdnd852
  */
-public class SignInController extends Controller<SignInBinding, SignInView> {
+public class SignInActivity extends BaseActivity<SignInView, SignInViewModel> {
 
     public boolean check(User user) {
         if (Strings.empty(user.getId())) return hideAndToast("아이디를 입력해주세요.");
@@ -34,7 +34,7 @@ public class SignInController extends Controller<SignInBinding, SignInView> {
     public void signIn(boolean stay, User user) {
         RxFirebase.signIn()
                 .success(u -> this.staySignedIn(stay, u))
-                .success(u -> moveAndFinish(MainController.class))
+                .success(u -> moveAndFinish(MainActivity.class))
                 .fail(u -> hideAndToast("로그인에 실패했습니다."))
                 .subscribe(user);
     }
