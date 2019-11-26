@@ -33,6 +33,7 @@ public class SignUpActivity extends BaseActivity<SignUpView, SignUpViewModel> {
 
     public void signUp(User user) {
         this.showProgress();
+
         RxFirebase.signUp()
                 .success(this::storeUserInformation)
                 .success(u -> hideAndToast("회원가입에 성공했습니다."))
