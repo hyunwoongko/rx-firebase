@@ -30,14 +30,13 @@ import java.lang.reflect.ParameterizedType;
 @SuppressWarnings("unchecked")
 public abstract class Controller<B extends ViewDataBinding, V extends View> extends AppCompatActivity {
 
-    protected B binding;
-    protected V view;
     protected Handler handler = new Handler();
+    private V view;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = DataBindingUtil.setContentView(this, readXml());
+        B binding = DataBindingUtil.setContentView(this, readXml());
         view = createView();
         binding.setLifecycleOwner(this);
         binding.setVariable(BR.view, view);
